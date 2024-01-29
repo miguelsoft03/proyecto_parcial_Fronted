@@ -1,0 +1,104 @@
+<body>
+    <div class="demo-button-container">
+        <button mat-raised-button class="demo-button" routerLink="/home-usuario">
+            Cancelar
+        </button>
+    </div>   
+    <div class="contenedor">
+        <h2>Crear Cuenta</h2>
+        <form [formGroup]="formularioUsuario">
+            <label class="main" for="nombre">Nombre del Usuario:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Nombre" formControlName="nombre">
+            
+            <label class="main" for="correo">Correo electrónico:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Correo" formControlName="correo">
+            
+            <label class="main" for="contrasena">Contraseña:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Contraseña" formControlName="contrasena">
+
+            <label class="main" for="telefono">Telefono:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Telefono" formControlName="telefono">
+            <button class="btn btn-primary" type="button" [disabled]="formularioUsuario.invalid"
+                                (click)="agregarUsuario()"
+                                >Agregar</button>
+        </form>
+
+
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let usuario of listaUsuarios">
+                <div class="d-flex justify-content-between">
+                    <label>{{usuario.nombre}}</label>
+                    <label>{{usuario.correo}}</label>
+                    <label>{{usuario.contrasena}}</label>
+                    <label>{{usuario.telefono}}</label>
+                    <button class="btn btn-danger btn-sm" type="button" 
+                    (click)="eliminarUsuario(usuario)"
+                    >Eliminar</button>
+                </div>
+            </li>
+        </ul>
+
+
+
+            <!-- <div class="contenedor">
+                <h2>Crear Cuenta</h2>
+                <form (ngSubmit)="agregarUsuario()" #usuarioForm="ngForm" [ngClass]="{ 'invalid-form': usuarioForm.invalid && usuarioForm.submitted }">
+                    <label class="main" for="Nombre">Nombre del Usuario:</label>
+                    <input class="main1" type="text" id="Nombre" name="Nombre" required [(ngModel)]="Nombre" #NombreField="ngModel">
+                    <div *ngIf="NombreField.invalid && NombreField.touched" class="error-message">
+                        Nombre es requerido
+                    </div>
+        
+                    <label class="main" for="Correo">Correo electrónico:</label>
+                    <input class="main1" type="email" id="Correo" name="Correo" required [(ngModel)]="Correo" #CorreoField="ngModel">
+                    <div *ngIf="CorreoField.invalid && CorreoField.touched" class="error-message">
+                        Correo electrónico inválido
+                    </div>
+        
+                    <label class="main" for="Contraseña">Contraseña:</label>
+                    <input class="main1" type="text" id="Contraseña" name="Contraseña" required [(ngModel)]="Contrasena" #ContrasenaField="ngModel">
+                    <div *ngIf="ContrasenaField.invalid && ContrasenaField.touched" class="error-message">
+                        Contraseña inválido
+                    </div>
+                    
+        
+                    <label class="main" for="Telefono">Telefono:</label>
+                    <input class="main1" type="text" id="Telefono" name="Telefono" required [(ngModel)]="Telefono" #TelefonoField="ngModel">
+                    <div *ngIf="TelefonoField.invalid && TelefonoField.touched" class="error-message">
+                        Telefono inválido
+                    </div> -->
+            <!--  -->
+            <!-- <div class="f">
+                <button type="submit" [disabled]="usuarioForm.invalid" class="btn btn-primary btn-lg">Agendar factura</button>
+                <button type="button" class="btn btn-secondary btn-lg" (click)="limpiarFormulario()">Limpiar formulario</button>
+                
+            </div> -->
+
+        <!-- <form (ngSubmit)="onSubmit()">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" [(ngModel)]="Usuario.Nombre" required>
+            </div>
+            <div>
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" [(ngModel)]="Usuario.Correo" required>
+            </div>
+            <div>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" [(ngModel)]="Usuario.Contrasena" required>
+            </div>
+            <div>
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" [(ngModel)]="Usuario.Telefono" required>
+            </div> 
+
+            <button type="submit">Crear Cuenta</button>-->
+
+            
+        
+    </div>
+</body> 
+<div class="mensaje-container" *ngIf="mostrarMensaje">
+    <span class="icono-exito">&#10004;</span>
+    <span class="texto-exito">Se registro exitosamente!!</span>
+</div>

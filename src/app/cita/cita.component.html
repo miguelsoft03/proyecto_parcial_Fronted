@@ -1,0 +1,134 @@
+<body>
+    <div class="demo-button-container">
+        <button mat-raised-button class="demo-button" routerLink="/home-usuario">
+            Perfil
+          </button>
+    </div>
+
+    <div class="container mt-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-4 col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Lista de Citas
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="formularioCita">
+
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" placeholder="Ingresar Id usuario" formControlName="idUsuario">
+                                <input type="text" class="form-control" placeholder="Ingresar Nombre" formControlName="nombre">
+                                <input type="text" class="form-control" placeholder="Ingresar Correo" formControlName="correo">
+                                <input type="number" class="form-control" placeholder="Ingresar Id mascota" formControlName="idMascota">
+                                <input type="text" class="form-control" placeholder="Ingresar Nombre de la mascota" formControlName="nombrePet">
+                                <input type="text" class="form-control" placeholder="Ingresar Ciudad" formControlName="ciudad">
+                                <input type="text" class="form-control" placeholder="Ingresar Especialidad" formControlName="especialidad">
+                                <input type="text" class="form-control" placeholder="Ingresar Sucursal" formControlName="sucursal">
+                                <input type="number" class="form-control" placeholder="Ingresar Mes" formControlName="mes">
+                                <input type="number" class="form-control" placeholder="Ingresar Dia" formControlName="dia">
+                                <button class="btn btn-primary" type="button" [disabled]="formularioCita.invalid"
+                                (click)="agregarCita()"
+                                >Agregar</button>
+                            </div>
+
+
+                        </form>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let cita of listaCitas">
+                                <div class="d-flex justify-content-between">
+                                    <label>{{cita.idUsuario}}</label>
+                                    <label>{{cita.nombre}}</label>
+                                    <label>{{cita.correo}}</label>
+                                    <label>{{cita.idMascota}}</label>
+                                    <label>{{cita.nombrePet}}</label>
+                                    <label>{{cita.ciudad}}</label>
+                                    <label>{{cita.especialidad}}</label>
+                                    <label>{{cita.sucursal}}</label>
+                                    <label>{{cita.mes}}</label>
+                                    <label>{{cita.dia}}</label>
+                                    <button class="btn btn-danger btn-sm" type="button" 
+                                    (click)="eliminarCita(cita)"
+                                    >Eliminar</button>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container-form">
+        <h1>Agendamiento de Citas </h1>
+    </div>
+    <form (ngSubmit)="agendarCita()" #citaForm="ngForm" [ngClass]="{ 'invalid-form': citaForm.invalid && citaForm.submitted }">
+        <label class="main" for="Nombre">Nombre:</label>
+        <input class="main1" type="text" id="Nombre" name="Nombre" required [(ngModel)]="Nombre" #NombreField="ngModel">
+        <div *ngIf="NombreField.invalid && NombreField.touched" class="error-message">
+            Nombre es requerido
+        </div>
+
+        <label class="main" for="Correo">Correo electrónico:</label>
+        <input class="main1" type="email" id="Correo" name="Correo" required [(ngModel)]="Correo" #CorreoField="ngModel">
+        <div *ngIf="CorreoField.invalid && CorreoField.touched" class="error-message">
+            Correo electrónico inválido
+        </div>&nbsp;
+
+        <label class="main" for="NombrePet">Nombre de la Mascota:</label>
+        <input class="main1" type="text" id="NombrePet" name="NombrePet" required [(ngModel)]="NombrePet" #NombrePetField="ngModel">
+        <div *ngIf="NombrePetField.invalid && NombrePetField.touched" class="error-message">
+            Nombre de la mascota es requerido
+        </div>
+        &nbsp;
+
+        <div class="container-paciente">
+            <label for="text"> Datos del paciente. </label></div>
+        &nbsp;
+        <label class="main" for="Ciudad">Ciudad:</label>
+        <input class="main1" type="text" id="Ciudad" name="Ciudad" required [(ngModel)]="Ciudad" #CiudadField="ngModel">
+        <div *ngIf="CiudadField.invalid && CiudadField.touched" class="error-message">
+            Ciudad es requerido
+        </div>
+
+        <label class="main" for="Especialidad">Especialidad:</label>
+        <input class="main1" type="text" id="Especialidad" name="Especialidad" required [(ngModel)]="Especialidad" #EspecialidadField="ngModel">
+        <div *ngIf="EspecialidadField.invalid && EspecialidadField.touched" class="error-message">
+            Especialidad es requerido
+        </div>
+
+        
+            <label class="main" for="Sucursal">Sucursal:</label>
+        <input class="main1" type="text" id="Sucursal" name="Sucursal" required [(ngModel)]="Sucursal" #SucursalField="ngModel">
+        <div *ngIf="SucursalField.invalid && SucursalField.touched" class="error-message">
+            Sucursal es requerido
+        </div> &nbsp;
+
+        <div class="container-disponibilidad">
+            <label for="mensaje">Disponibilidad de Citas: </label>
+        </div>
+
+        <label class="main" for="Mes">Mes:</label>
+        <input class="main1" type="number" id="Mes" name="Mes" min="1" max="12" step="1" required [(ngModel)]="Mes" #MesField="ngModel">
+        <div *ngIf="MesField.invalid && MesField.touched" class="error-message">
+            Mes es requerido
+        </div>
+        
+
+        <label class="main" for="Dia">Día:</label>
+        <input class="main1" type="number" id="Dia" name="Dia" min="1" max="12" step="1" required [(ngModel)]="Dia" #DiaField="ngModel">
+        <div *ngIf="DiaField.invalid && DiaField.touched" class="error-message">
+            Día es requerido
+        </div>
+
+        <div class="f">
+            <button type="submit" [disabled]="citaForm.invalid" class="btn btn-primary btn-lg">Agendar cita</button>
+            <button type="button" class="btn btn-secondary btn-lg" (click)="limpiarFormulario()">Limpiar formulario</button>
+        </div>
+    </form> -->
+    
+</body>
+<div class="mensaje-container" *ngIf="mostrarMensaje">
+    <span class="icono-exito">&#10004;</span>
+    <span class="texto-exito">Cita agendada exitosamente!!</span>
+</div> 

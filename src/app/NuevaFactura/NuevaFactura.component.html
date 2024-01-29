@@ -1,0 +1,115 @@
+<body>
+    <div class="demo-button-container">
+        <button mat-raised-button class="demo-button" routerLink="/home-usuario">
+            Perfil
+        </button>
+    </div>
+    <div class="container-form">
+        <h1>Agendamiento de Factura </h1>
+    </div>
+
+    <div class="contenedor">
+        <h2>Crear Cuenta</h2>
+        <form [formGroup]="formularioFactura">
+            <label class="main" for="IdUsuario">Id del Usuario:</label>
+            <input type="number" class="form-control" placeholder="Ingresar Id usuario" formControlName="IdUsuario">
+
+            <label class="main" for="Nombre">Nombre del Usuario:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Nombre" formControlName="Nombre">
+            
+            <label class="main" for="Correo">Correo electrónico:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Correo" formControlName="Correo">
+            
+            <label class="main" for="IdMascota">Id de la Mascota:</label>
+            <input type="number" class="form-control" placeholder="Ingresar Id Mascota" formControlName="IdMascota">
+
+            <label class="main" for="NombrePet">Nombre de la mascota:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Nombre de la mascota" formControlName="NombrePet">
+
+            <label class="main" for="IdCita">Id de la Cita:</label>
+            <input type="number" class="form-control" placeholder="Ingresar Id Cita" formControlName="IdCita">
+
+            <label class="main" for="FechaCita">Fecha de la Cita:</label>
+            <input type="date" class="form-control" placeholder="Ingresar Fecha Cita" formControlName="FechaCita">
+
+            <label class="main" for="Especialidad">Especialidad:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Especialidad" formControlName="Especialidad">
+
+            <label class="main" for="Costos">Costo:</label>
+            <input type="decimal" class="form-control" placeholder="Ingresar el Costo" formControlName="Costos">
+
+            <button class="btn btn-primary" type="button" [disabled]="formularioFactura.invalid"
+                                (click)="agregarFactura()"
+                                >Agregar</button>
+        </form>
+    </div>
+
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let factura of listaFacturas">
+                <div class="d-flex justify-content-between">
+                    <label>{{factura.IdUsuario}}</label>
+                    <label>{{factura.Nombre}}</label>
+                    <label>{{factura.Correo}}</label>
+                    <label>{{factura.IdMascota}}</label>
+                    <label>{{factura.NombrePet}}</label>
+                    <label>{{factura.IdCita}}</label>
+                    <label>{{factura.FechaCita}}</label>
+                    <label>{{factura.Especialidad}}</label>
+                    <label>{{factura.Costos}}</label>
+                    <button class="btn btn-danger btn-sm" type="button" 
+                    (click)="eliminarFactura(factura)"
+                    >Eliminar</button>
+                </div>
+            </li>
+        </ul>
+
+
+    <!-- <form (ngSubmit)="agendarFactura()" #facturaForm="ngForm" [ngClass]="{ 'invalid-form': facturaForm.invalid && facturaForm.submitted }">
+        <label class="main" for="Nombre">Nombre del Usuario:</label>
+        <input class="main1" type="text" id="Nombre" name="Nombre" required [(ngModel)]="Nombre" #NombreField="ngModel">
+        <div *ngIf="NombreField.invalid && NombreField.touched" class="error-message">
+            Nombre es requerido
+        </div>
+
+        <label class="main" for="Correo">Correo electrónico:</label>
+        <input class="main1" type="email" id="Correo" name="Correo" required [(ngModel)]="Correo" #CorreoField="ngModel">
+        <div *ngIf="CorreoField.invalid && CorreoField.touched" class="error-message">
+            Correo electrónico inválido
+        </div>
+
+        <label class="main" for="NombrePet">Nombre de la Mascota:</label>
+        <input class="main1" type="text" id="NombrePet" name="NombrePet" required [(ngModel)]="NombrePet" #NombrePetField="ngModel">
+        <div *ngIf="NombrePetField.invalid && NombrePetField.touched" class="error-message">
+            Nombre de la mascota es requerido
+        </div>
+
+        Otros campos del formulario... 
+        <label class="main" for="FechaCita">Fecha Cita:</label>
+        <input class="main1" type="text" id="FechaCita" name="FechaCita" required [(ngModel)]="FechaCita" #FechaCitaField="ngModel">
+        <div *ngIf="FechaCitaField.invalid && FechaCitaField.touched" class="error-message">
+            Fecha Cita es requerido
+        </div>
+
+
+        <label class="main" for="Especialidad">Especialidad:</label>
+        <input class="main1" type="text" id="Especialidad" name="Especialidad" required [(ngModel)]="Especialidad" #EspecialidadField="ngModel">
+        <div *ngIf="EspecialidadField.invalid && EspecialidadField.touched" class="error-message">
+            Especialidad es requerido
+        </div>
+
+        <label class="main" for="Costos">Costo:</label>
+        <input class="main1" type="number" id="Costos" name="Costos" required [(ngModel)]="Costos" #CostosField="ngModel">
+        <div *ngIf="CostosField.invalid && CostosField.touched" class="error-message">
+            Costo es requerido
+        </div>
+
+        <div class="f">
+            <button type="submit" [disabled]="facturaForm.invalid" class="btn btn-primary btn-lg">Agendar factura</button>
+            <button type="button" class="btn btn-secondary btn-lg" (click)="limpiarFormulario()">Limpiar formulario</button>
+        </div>
+    </form> -->
+</body>
+<div class="mensaje-container" *ngIf="mostrarMensaje">
+    <span class="icono-exito">&#10004;</span>
+    <span class="texto-exito">Factura agendada exitosamente!!</span>
+</div>
